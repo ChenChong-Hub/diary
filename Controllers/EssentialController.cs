@@ -34,6 +34,7 @@ namespace MvcDiary.Controllers
 
         public IActionResult Index()
         {
+            //根据星期选择课程
             DateTime dateTime = DateTime.Now;
             _ = dateTime.DayOfWeek switch
             {
