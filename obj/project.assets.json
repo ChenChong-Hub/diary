@@ -9213,11 +9213,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\41022\\source\\repos\\MvcDiary\\MvcDiary\\MvcDiary.csproj",
+      "projectUniqueName": "C:\\Users\\41022\\Documents\\GitHub\\diary\\MvcDiary.csproj",
       "projectName": "MvcDiary",
-      "projectPath": "C:\\Users\\41022\\source\\repos\\MvcDiary\\MvcDiary\\MvcDiary.csproj",
+      "projectPath": "C:\\Users\\41022\\Documents\\GitHub\\diary\\MvcDiary.csproj",
       "packagesPath": "C:\\Users\\41022\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\41022\\source\\repos\\MvcDiary\\MvcDiary\\obj\\",
+      "outputPath": "C:\\Users\\41022\\Documents\\GitHub\\diary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
