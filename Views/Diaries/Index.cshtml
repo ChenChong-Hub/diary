@@ -1,0 +1,115 @@
+﻿@model MvcDiary.Models.DiarySearchViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="col-sm-12 col-md-12 main">
+        <h1>Index</h1>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <form asp-controller="Diaries" asp-action="Index" method="get">
+            <p>
+                <select asp-for="DiaryCategory" asp-items="Model.Categories">
+                    <option value="">All</option>
+                </select>
+                Title: <input type="text" asp-for="SearchString" />
+                UserName: <input type="text" asp-for="UserName" />
+                @*<input type="hidden" asp-for="PageIndex" value="@Model.PageIndex" />*@
+                <input type="submit" value="Filter" asp-route-id="@Model.PageIndex" />
+            </p>
+        </form>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].ReleaseDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].IsPublic)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].Views)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diaries[0].Thumbs)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Diaries)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <a asp-action="Concern" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsPublic)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Views)
+                        </td>
+                        <td>
+                            <form asp-action="Thumb" asp-route-id="@item.Id">
+                                <input type="image" src="~/ico/like.png" width="30" height="30" name="Thumbs" alt="thumbs">
+                                <label class="align-middle">@item.ThumbsCount</label>
+                            </form>
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="container">
+            <p>每页最多显示10条日志。</p>
+            <ul class="pagination">
+                @if (Model.HavePrevious)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Content("~/diaries/index/")@(Model.PageIndex - 1)">上一页</a></li>
+                }
+                @for (int i = Model.Start; i < Model.End; i++)
+                {
+                    if (i == Model.PageIndex)
+                    {
+                        <li class="page-item active"><a class="page-link" href="@Url.Content("~/diaries/index/")@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Content("~/diaries/index/")@i">@i</a></li>
+                    }
+                }
+                @if (Model.HaveNext)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Content("~/diaries/index/")@(Model.PageIndex+1)">下一页</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

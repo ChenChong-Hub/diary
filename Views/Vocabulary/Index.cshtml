@@ -1,0 +1,96 @@
+﻿@model List<MvcDiary.Models.Root>
+
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            activeFunction()
+        };
+
+        function activeFunction() {
+            var userQuery = document.URL.substring((document.URL.lastIndexOf('/') + 1), document.URL.length);
+            switch (userQuery) {
+                case "prefix":
+                    selectFunction(userQuery);
+                    break;
+                case "root":
+                    selectFunction(userQuery);
+                    break;
+                case "suffix":
+                    selectFunction(userQuery);
+                    break;
+                default:
+                    selectFunction("prefix");
+                    break;
+            }
+        }
+
+        function selectFunction(root) {
+            var list = document.querySelectorAll('.temp_list li');
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].id == root) {
+                    list[i].className = "active";
+                } else {
+                    list[i].className = "";
+                }
+            }
+        }
+    </script>
+</head>
+
+<div class="row">
+    <div class="col-sm-2">
+        <div class="temp_list">
+            <ul>
+                <li id="prefix">
+                    <a asp-action="Index" asp-route-id="prefix">
+                        <span>前缀</span>
+                    </a>
+                </li>
+                <li id="root">
+                    <a asp-action="Index" asp-route-id="root">
+                        <span>词根</span>
+                    </a>
+                </li>
+                <li id="suffix">
+                    <a asp-action="Index" asp-route-id="suffix">
+                        <span>后缀</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <form asp-controller="Vocabulary" asp-action="Index" method="get">
+            <p>
+                <div class="input-group">
+                    <input type="hidden" class="form-control" name="id" value="Url.Action().Substring(Url.Action().LastIndexOf('/') + 1)" />
+                    <input type="text" class="form-control" name="querystring" placeholder="Search for..." width="500">
+                    <span class="input-group-btn">
+                        <button class="btn" type="submit">Go!</button>
+                    </span>
+                </div>
+            </p>
+        </form>
+        <a style="display:inline-block;text-align:right;background:aliceblue" asp-action="Create">Create New</a>
+        <div class="card-columns">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" asp-action="Reletive" asp-route-id="@item.Id">@item.Name</a>
+                    </div>
+                    <div class="card-body">
+                        <p style="color:chartreuse" class="card-text">@item.Category</p>
+                        <p class="card-text">@item.Meaning</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">action</a>
+                        <a href="#" class="card-link">action</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

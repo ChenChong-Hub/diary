@@ -1,0 +1,48 @@
+﻿@model MvcDiary.Models.RecordViewModel;
+
+<head>
+    <title>Record</title>
+    <script src="~/lib/Chart/dist/Chart.min.js"></script>
+    <script src="~/lib/Chart/dist/Chart.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            chartFunction()
+        };
+
+        function chartFunction() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'],
+                    datasets: [{
+                        label: '@Model.Title',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data:@Model.GetData(),
+                        }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+        }
+    </script>
+</head>
+
+<div>
+    <div>
+        <img class="col-md-12 col-sm-12" src="~/assets/img_ride.jpg" />
+    </div>
+    <div class="text-center">
+        <h5>There is no beautiful water without terrible depth.</h5>
+    </div>
+</div>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>

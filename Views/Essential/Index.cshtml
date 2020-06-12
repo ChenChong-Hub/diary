@@ -1,0 +1,143 @@
+﻿@model List<MvcDiary.Models.EssentialWord>
+
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/toggle.css" />
+    <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            toggleFunction()
+        };
+
+        function toggleFunction() {
+            var checkbox = document.getElementById('simple_2');
+            var box = document.getElementsByClassName('wordname');
+            checkbox.onclick = function () {
+                if (this.checked) {
+                    for (var i = 0; i < box.length; i++) {
+                        box[i].style['display'] = 'block';
+                    }
+                } else {
+                    for (var i = 0; i < box.length; i++) {
+                        box[i].style['display'] = 'none';
+                    }
+                }
+            };
+        }
+
+        function FormAjax() {
+            //定义数组
+            var arrayColumn = new Array();
+            var trList = $("#trainTable").children("tr");
+            for (var i = 0; i < trList.length; i++) {
+                //获取tr行
+                var trArr = trList.eq(i);
+                //定义列名称
+                var ColumnList = new Object();
+                ColumnList.Id = trArr.children("td").eq(0).html().trim();
+                ColumnList.Name = trArr.children("td").eq(2).children(0).html().trim();
+                ColumnList.Meaning = trArr.children("td").eq(4).html().trim();
+                ColumnList.Spelling = trArr.children("td").eq(5).find("input[type='text']").val().trim();
+                ColumnList.ReciteCount = trArr.children("td").eq(6).html().trim();
+                ColumnList.RightCount = trArr.children("td").eq(7).html().trim();
+                //ColumnList.Sex = trArr.children("td").eq(4).find("select option:selected").text();
+                arrayColumn.push(ColumnList);
+            }
+            $.ajax({
+                type: 'post',
+                url: 'Essential/HandIn',
+                data: { "arrList": JSON.stringify(arrayColumn) },
+                dataType: 'text',
+                cache: false,
+                traditional: true,
+                success: function (e) {
+                    if (e) {
+                        alert("提交成功");
+                        $(window).attr("location", "essential/handin");
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<div class="container-fluid">
+    <div class="col-sm-12 col-md-12 main">
+        <h1>Essential</h1>
+        @*<form asp-controller="Essential" asp-action="ExcelData" method="post">
+                <p>
+                    <input type="submit" value="Inject" />
+                </p>
+            </form>*@
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th hidden>
+                        @Html.DisplayNameFor(model => model[0].Id)
+                    </th>
+                    <th>
+                        Num
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Name)
+                        <input type="checkbox" id="simple_2">
+                        <label for="simple_2"></label>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Pronunciation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Meaning)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Spelling)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ReciteCount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].RightCount)
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="trainTable">
+                @{
+                    int oInt = 1;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td hidden>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @oInt
+                            </td>
+                            <td>
+                                <label class="wordname" style="display:none">@Html.DisplayFor(modelItem => item.Name)</label>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pronunciation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Meaning)
+                            </td>
+                            <td>
+                                <input class="wordspell" type="text" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReciteCount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RightCount)
+                            </td>
+                        </tr>
+                        oInt++;
+                    }
+                }
+            </tbody>
+        </table>
+        <hr />
+        <button id="btn_Train" type="button" class="btn btn-primary" onclick="FormAjax();">SUBMIT</button>
+    </div>
+</div>

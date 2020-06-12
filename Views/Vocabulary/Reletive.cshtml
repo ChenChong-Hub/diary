@@ -1,0 +1,80 @@
+﻿@model MvcDiary.Models.WordViewModel;
+
+@{
+    ViewData["Title"] = "Words";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/toggle.css" />
+    <script type="text/javascript">
+        window.onload = function () {
+            toggleFunction()
+        };
+
+        function toggleFunction() {
+            var checkbox = document.getElementById('simple_3');
+            var box = document.getElementsByClassName('meaning');
+            checkbox.onclick = function () {
+                if (this.checked) {
+                    for (var i = 0; i < box.length; i++) {
+                        box[i].style['display'] = 'block';
+                    }
+                } else {
+                    for (var i = 0; i < box.length; i++) {
+                        box[i].style['display'] = 'none';
+                    }
+                }
+            };
+        }
+    </script>
+</head>
+
+<div class="container-fluid">
+    <div class="col-sm-12 col-md-12 main">
+        <div>
+            <h3>Root</h3>
+            <hr />
+            <h4 style="color:chocolate">@Model.Root.Name</h4>
+            <h6>@Model.Root.Category</h6>
+            <h6>@Model.Root.Meaning</h6>
+            <br>
+        </div>
+
+        <div>
+            <a asp-action="AddWord" asp-route-id="@Model.Root.Id">Create New</a>
+        </div>
+        <br>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Words[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Words[0].Meaning)
+                        <input type="checkbox" id="simple_3">
+                        <label for="simple_3" class="green"></label>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Words)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td style="table-layout:fixed" width="350" id="mean">
+                            <label class="meaning" style="display:none">@Html.DisplayFor(modelItem => item.Meaning)</label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>

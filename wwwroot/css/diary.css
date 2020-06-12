@@ -1,0 +1,165 @@
+﻿/*自定义样式*/
+/*图片轮播*/
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.light-wrapper {
+    background: #fbfbfb;
+}
+
+.welcome .col-wrapper {
+    padding: 0 10px;
+}
+
+/*图标*/
+.icon-intro {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-image: url(../ico/intro.png);
+    background-position: center center;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+}
+
+.icon-idea {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-image: url(../ico/idea.png);
+    background-position: center center;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+}
+
+.icon-coffee {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-image: url(../ico/coffee.png);
+    background-position: center center;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+}
+
+/*图片块*/
+.thumbnail_270 {
+    float: left;
+    margin: 0px 2.2% 0px 0;
+    position: relative;
+    width: 100%;
+    background-color: #f4f4f4;
+    border-bottom: 3px solid #e4e4e4;
+    border-bottom-right-radius: 24px
+}
+
+.portfolio-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-width: 530px;
+    margin: auto auto 1rem
+}
+
+    .portfolio-item .caption {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(33,37,41,.2);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1
+    }
+
+        .portfolio-item .caption .caption-content {
+            color: #fff;
+            margin: auto 2rem 2rem
+        }
+
+            .portfolio-item .caption .caption-content h2 {
+                font-size: .8rem;
+                text-transform: uppercase
+            }
+
+            .portfolio-item .caption .caption-content p {
+                font-weight: 300;
+                font-size: 1.2rem
+            }
+
+/*鼠标经过图片*/
+.imghvr-fade {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+    .imghvr-fade figcaption {
+        position: absolute;
+        top: 30%;
+        left: 15px;
+        color: black;
+        opacity: 0
+    }
+
+    .imghvr-fade:hover > img {
+        opacity: 0.3
+    }
+
+    .imghvr-fade:hover figcaption {
+        opacity: 1
+    }
+
+/*返回顶部*/
+.btntop {
+    width: 30px;
+    height: 33px;
+    margin: 5px;
+    background: url(../ico/top.png);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+/*侧边栏导航*/
+.temp_list_wrapper {
+    background: #d2d6f1;
+}
+
+
+
+.temp_list li {
+    border-top: 2px solid #86e3ce;
+    border-bottom: 2px solid #86e3ce;
+}
+
+    .temp_list li a {
+        display: block;
+        width: 100%;
+        color: #9099B7;
+        font-size: 1.0em;
+        text-transform: uppercase;
+        padding: 2px 2px 5px 2px;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+    }
+
+        .temp_list li a span {
+            color: black;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .temp_list li a:hover, .temp_list li.active a {
+            background: #FFCD45;
+            box-shadow: inset 0 1px 8px #5AA4C0;
+            -webkit-box-shadow: inset 0 1px 8px #5AA4C0;
+            -moz-box-shadow: inset 0 1px 8px #5AA4C0;
+        }

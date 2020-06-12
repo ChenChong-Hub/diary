@@ -1,0 +1,50 @@
+﻿@model MvcDiary.Models.FriendViewModel
+
+@{
+    ViewData["Title"] = "Friend";
+}
+
+<h1>Friend</h1>
+
+<h4>Concern</h4>
+<hr />
+<h3>You can add this user as a friend</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Concern" method="post">
+            @if (Model.IsFriend)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.FriendName</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">您已经关注了该用户!</label>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="FriendId" value="@Model.FriendId" />
+                <input type="hidden" asp-for="FriendName" value="@Model.FriendName" />
+                <input type="hidden" asp-for="MyId" value="@Model.MyId" />
+                <input type="hidden" asp-for="IsFriend" value="@Model.IsFriend" />
+                <div class="form-group">
+                    <label class="control-label">@Model.FriendName</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">是否关注该用户?</label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Concern" class="btn btn-primary" />
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
